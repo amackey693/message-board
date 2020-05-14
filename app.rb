@@ -7,9 +7,38 @@ also_reload('lib/**/*.rb')
 
 
 # EXAMPLES FOR GET, POST, PATCH & DELETE
-# get('/') do
-#   @albums = Album.sort
-#   erb(:albums) #erb file name
+
+get('/') do
+  @boards = Board.all
+  erb(:homepage)
+end
+
+get('/homepage') do
+  @boards = Board.all
+  erb(:homepage)
+end
+
+get('/homepage/giddyup') do
+  erb(:giddyup)
+end
+
+get('/homepage/:id/view') do
+  @board = Board.find(params[:id].to_i())
+  erb(:view)
+end
+
+post('/homepage/giddyup') do 
+  name = params[:board_name]
+  topic = params[:board_topic]
+  author = params[:board_author]
+  board = Board.new({:name => name, :topic => topic, :author => author, :id => nil})
+  board.save()
+  redirect to('/homepage')
+end
+
+
+# get('/albums/new') do
+#   erb(:new_album)
 # end
 
 # post('/albums') do ## Adds album to list of albums, cannot access in URL bar
