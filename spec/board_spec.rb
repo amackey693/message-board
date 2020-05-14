@@ -8,7 +8,7 @@ require 'pry'
 describe '#Board' do
   before(:each) do
     Board.clear()
-    @board = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+    @board = Board.new({:name => "yee-haw", :topic => "horse tails", :author => "Molly", :id => nil})
     @board.save()
     @board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 
     @board2.save()
@@ -70,8 +70,9 @@ describe '#Board' do
 
   describe('.search') do 
     it("searches through boards by name and returns boards that match") do 
-    expect(Board.search("tails")).to(eq([@board2]))
+    expect(Board.search("Tails")).to(eq([@board, @board2]))
     end
   end
-  
+
+  ##search is case sensitive! fix?
 end

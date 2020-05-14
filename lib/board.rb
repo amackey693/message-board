@@ -7,8 +7,8 @@ class Board
   @@total_rows = 0
   
   def initialize(attributes)
-    @name = attributes.fetch(:name)
-    @topic = attributes.fetch(:topic)
+    @name = attributes.fetch(:name).downcase
+    @topic = attributes.fetch(:topic).downcase
     @author = attributes.fetch(:author)
     @id = attributes.fetch(:id) || @@total_rows += 1
     @timestamp = Time.new()
@@ -43,5 +43,17 @@ class Board
 
   def delete()
     @@boards.delete(self.id)
+  end
+
+  def self.search(search)
+    search = search.downcase
+    board_names = Board.all.map {|b| b.name }
+    result = []
+    boards = board_names.grep(/#{search}/)
+    boards.each do |b| 
+      display = Board.all.select {|e| e.name.include?(b) || e.topic.include?(b) }
+      result.concat(display)
+    end
+    result
   end
 end
