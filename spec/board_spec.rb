@@ -74,5 +74,11 @@ describe '#Board' do
     end
   end
 
-  ##search is case sensitive! fix?
+  describe('#sort') do
+    it("sorts by time time stamp") do
+      board3 = Board.new({:name => "nay-nays", :topic => "wrangler jeans", :author => "Jenny", :id => nil})
+      expect(Board.sort()).to(eq([@board1, @board2, board3]))
+    end
+  end
+
 end

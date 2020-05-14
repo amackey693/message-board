@@ -49,9 +49,9 @@ class Board
     search = search.downcase
     board_names = Board.all.map {|b| b.name }
     result = []
-    boards = board_names.grep(/#{search}/)
-    boards.each do |b| 
-      display = Board.all.select {|e| e.name.include?(b) || e.topic.include?(b) }
+    all_boards = board_names.grep(/#{search}/)
+    all_boards.each do |a| 
+      display = Board.all.select {|b| b.name.include?(a) || b.topic.include?(a) }
       result.concat(display)
     end
     result
