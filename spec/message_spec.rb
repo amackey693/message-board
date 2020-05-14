@@ -1,7 +1,10 @@
 require 'rspec'
-require 'song'
-require 'album'
+require 'message'
+require 'board'
 require 'pry'
+
+
+
 
 # EXAMPLES FOR TESTING 
 # describe '#Class' do

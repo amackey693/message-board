@@ -2,7 +2,7 @@
 
 #### _A practice application using Ruby, Gem & Pry. DATE_
 
-#### By _**YOUR NAME HERE**_
+#### By _**Mark Gridley, Allison Mackey, Jozy Kinnaman**_
 
 ## Description
 
@@ -22,13 +22,13 @@ _This application will allow the user to ._
 
 |   Behavior Description        |
 |-------------------------------|
-| 1.  []|
-| 2.  []|
-| 3.  []|
-| 4.  []|
-| 5.  []|
-| 6.  []|
-| 7.  []|
+| 1. A user can create a new board to post messages[] | new board = "Horse Girls ONLY"
+| 2. A user can post new messages to any board [] | new message = "Yeehaw!"
+| 3. A user can search for a message OR a specific board [] | search = "Horse Girls ONLY!"
+| 4. Add a timestamp to both Boards and Messages [] | "Yeehaw!" -04.20.2020
+| 5. A user can sort sort messages from oldest to newest [] | 04.20.2020, 04.21.2020, etc.
+| 6. A user or admin can log in using the navbar [] | 
+| 7. An admin can update and/or delete messages [] | 
 
 
 ## Known Bugs
