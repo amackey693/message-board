@@ -53,4 +53,14 @@ describe '#Board' do
       expect(Board.find(@board.id)).to(eq(@board))
     end
   end
+
+  describe('#update') do
+    it("updates a board by id") do
+     @board.update("Neigh")
+     expect(@board.name).to(eq("Neigh"))
+    end
+  end
+
+  
+  
 end

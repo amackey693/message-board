@@ -36,4 +36,9 @@ class Board
     @@boards[id]
   end
 
+  def update(name)
+    self.name = name
+    @@boards[self.id] = Board.new({:name => self.name, :topic => self.topic, :author => self.author, :id => self.id})
+  end
+
 end
