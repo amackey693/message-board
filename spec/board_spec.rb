@@ -67,5 +67,11 @@ describe '#Board' do
      expect(Board.all).to(eq([@board2]))
     end
   end
+
+  describe('.search') do 
+    it("searches through boards by name and returns boards that match") do 
+    expect(Board.search("tails")).to(eq([@board2]))
+    end
+  end
   
 end

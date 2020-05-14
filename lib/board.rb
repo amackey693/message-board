@@ -41,4 +41,7 @@ class Board
     @@boards[self.id] = Board.new({:name => self.name, :topic => self.topic, :author => self.author, :id => self.id})
   end
 
+  def delete()
+    @@boards.delete(self.id)
+  end
 end
