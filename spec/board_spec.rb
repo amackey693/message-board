@@ -6,26 +6,46 @@ require 'pry'
 
 
 describe '#Board' do
-  # before(:each) do
-  #   Board.clear()
-  #   @board = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
-  #   @board.save()
-  # end
+  before(:each) do
+    Board.clear()
+    @board = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+    @board.save()
+    @board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 
+    @board2.save()
+  end
 
   describe('#inititalize') do
     it ("initializes an object") do
-      board = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
-      expect(board.name).to(eq("yee-haw"))
+      expect(@board.name).to(eq("yee-haw"))
     end
   end
 
   describe('#save') do
     it("saves a board") do
-    board1 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
-    board1.save() 
-    board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 
-    board2.save()
-     expect(Board.all).to(eq([board1, board2])) 
+      expect(Board.all).to(eq([@board, @board2])) 
     end
   end
+
+  describe('.all') do
+    it("returns an empty array if there are no boards") do
+      Board.clear()
+      expect(Board.all).to(eq([])) 
+    end
+  end
+
+  describe('.clear') do
+    it("clears all boards") do
+      Board.clear()
+      expect(Board.all).to(eq([]))
+    end
+  end
+
+  describe('#==') do
+    it("is the same board if it has the same attributes as another board") do
+      board1 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+      board2 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+      expect(board1).to(eq(board2))
+    end
+  end
+
 end

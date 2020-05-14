@@ -14,7 +14,22 @@ class Board
     @timestamp = Time.new()
   end
 
-  def save
-    
+  def self.all
+    @@boards.values()
+    # binding.pry
   end
+
+  def save 
+    @@boards[self.id] = Board.new({:name => self.name, :topic => self.topic, :author => self.author, :id => self.id})
+  end
+
+  def ==(board_to_compare)
+    self.name() == board_to_compare.name()
+  end
+
+  def self.clear
+    @@boards = {}
+    @@total_rows = 0
+  end
+
 end
