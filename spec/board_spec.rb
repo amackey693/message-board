@@ -48,4 +48,9 @@ describe '#Board' do
     end
   end
 
+  describe('.find') do
+    it("finds a board by id") do
+      expect(Board.find(@board.id)).to(eq(@board))
+    end
+  end
 end

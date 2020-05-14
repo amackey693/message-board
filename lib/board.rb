@@ -32,4 +32,8 @@ class Board
     @@total_rows = 0
   end
 
+  def self.find(id)
+    @@boards[id]
+  end
+
 end

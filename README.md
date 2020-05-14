@@ -22,7 +22,7 @@ _This application will allow the user to ._
 
 |   Behavior Description        |
 |-------------------------------|
-| 1. A user can create a new board to post messages[] | new board = "Horse Girls ONLY"
+| 1. A user can create a new board to post messages[√] | new board = "Horse Girls ONLY"
 | 2. A user can post new messages to any board [] | new message = "Yeehaw!"
 | 3. A user can search for a message OR a specific board [] | search = "Horse Girls ONLY!"
 | 4. Add a timestamp to both Boards and Messages [] | "Yeehaw!" -04.20.2020
