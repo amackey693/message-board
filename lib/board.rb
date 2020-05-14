@@ -56,4 +56,8 @@ class Board
     end
     result
   end
+
+  def self.sort
+    Board.all.sort_by{|time| time.timestamp }
+  end
 end
