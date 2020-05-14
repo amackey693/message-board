@@ -61,6 +61,11 @@ describe '#Board' do
     end
   end
 
-  
+  describe('#delete') do 
+    it("deletes a board") do 
+     @board.delete()
+     expect(Board.all).to(eq([@board2]))
+    end
+  end
   
 end
