@@ -77,8 +77,8 @@ describe '#Board' do
   describe('#sort') do
     it("sorts by time time stamp") do
       board3 = Board.new({:name => "nay-nays", :topic => "wrangler jeans", :author => "Jenny", :id => nil})
-      expect(Board.sort()).to(eq([@board1, @board2, board3]))
+      board3.save()
+      expect(Board.sort()).to(eq([@board, @board2, board3]))
     end
   end
-
 end

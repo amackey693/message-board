@@ -58,6 +58,6 @@ class Board
   end
 
   def self.sort
-    Board.all.sort_by{|time| time.timestamp }
+    Board.all.sort_by{|time| time.timestamp}
   end
 end
