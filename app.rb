@@ -36,6 +36,21 @@ post('/homepage/giddyup') do
   redirect to('/homepage')
 end
 
+post('/hompage/:id/comments') do
+  comment = params[:comment]
+  author = params[:author]
+  @board = Board.find(params[:id].to_i())
+  message = Message.new({:comment => comment, :author => author, :board_id => @board.id, :id => nil})
+  message.save()
+  redirect to('/homepage/:id/view')
+end
+
+# post('/albums/:id/songs') do
+#   @album = Album.find(params[:id].to_i())
+#   song = Song.new(params[:song_name], @album.id, nil)
+#   song.save()
+#   erb(:album)
+# end
 
 # get('/albums/new') do
 #   erb(:new_album)

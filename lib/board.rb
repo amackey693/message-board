@@ -60,4 +60,8 @@ class Board
   def self.sort
     Board.all.sort_by{|time| time.timestamp}
   end
+
+  def comments
+    Message.find_by_board(self.id)
+  end
 end

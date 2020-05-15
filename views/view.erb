@@ -1,3 +1,31 @@
 <h3>Board Name: <%= @board.name%></h3>
 <h3>Topic: <%= @board.topic%></h3> 
 <h3>Author: <%= @board.author%></h3>
+
+
+<h1>Messages</h1>
+ <% if @board.comments %>
+  <% @board.comments each do |c| %>
+   <h4>Author: <%= message.author %></h4>
+   <p>Comment: <%= message.comment %></p>
+   <footer>Time: <%= message.timestamp %></footer>
+  <% end %>
+<% else %>
+ <p>There are no comments to display at this time!</p>
+<% end %>
+
+
+<h4>Add a message:</h4>
+
+<form action="/homepage/<%= @board.id %>/comments" method="post">
+  <div class="form-group">
+    <label for="comment">Add Comment/Message:</label>
+    <input id="comment" name="comment" class="form-control" type="text">
+    <label for="author">Enter your name:</label>
+    <input id="author" name="author" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
+
+
+<p><a href="/homepage">Return to the homepage!!</a></p>
