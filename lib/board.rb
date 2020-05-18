@@ -26,7 +26,7 @@ class Board
   end
 
   def save 
-    @@boards[self.id] = Board.new({:name => self.name, :topic => self.topic, :author => self.author, :id => self.id})
+    result = DB.exec("INSERT INTO boards (name, topic, author) VALUES ('#{@name}', '#{@topic}', '#{@author}') RETURNING id;")
   end
 
   def ==(board_to_compare)
@@ -34,8 +34,7 @@ class Board
   end
 
   def self.clear
-    @@boards = {}
-    @@total_rows = 0
+   DB.exec("DELETE FROM boards *;")
   end
 
   def self.find(id)

@@ -3,20 +3,26 @@ require 'pry'
 class Message
   attr_accessor :comment, :author, :board_id
   attr_reader :timestamp, :id
-  @@messages = {}
-  @@total_rows = 0
   
   def initialize(attributes)
     @comment = attributes.fetch(:comment)
     @author = attributes.fetch(:author)
     @board_id = attributes.fetch(:board_id)
-    @id = attributes.fetch(:id) || @@total_rows += 1
+    @id = attributes.fetch(:id)
     @timestamp = Time.new()
   end
 
   def self.all
-    @@messages.values()
-    # binding.pry
+    returned_messages = DB.exec("SELECT * FROM messages;")
+    messages = []
+    returned_messages.each() do |message|
+      name = message.fetch("comment")
+      author = message.fetch("author")
+      board_id = message.fetch("board_id").to_i()
+      id = message.fetch("id").to_i()
+      messages.push( Message.new({:comment => comment, :author => author, :id => id, :board_id => board_id}) )
+    end
+    boards
   end
 
   def ==(comment_to_compare)

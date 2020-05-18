@@ -2,12 +2,12 @@ require 'spec_helper'
 
 
 describe '#Board' do
-  # before(:each) do
-  #   @board = Board.new({:name => "yee-haw", :topic => "horse tails", :author => "Molly", :id => nil})
-  #   # @board.save()
-  #   @board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 
-  #   # @board2.save()
-  # end
+  before(:each) do
+    @board = Board.new({:name => "yee-haw", :topic => "horse tails", :author => "Molly", :id => nil})
+    @board.save()
+    @board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 
+    @board2.save()
+  end
 
   # describe('#inititalize') do
   #   it ("initializes an object") do
@@ -22,28 +22,31 @@ describe '#Board' do
       expect(Board.all).to(eq([])) 
     end
   end
-end
 
-#   describe('#save') do
-#     it("saves a board") do
-#       expect(Board.all).to(eq([@board, @board2])) 
-#     end
-#   end
+  describe('#==') do
+    it("is the same board if it has the same attributes as another board") do
+      board1 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+      board2 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
+      expect(board1).to(eq(board2))
+    end
+  end
   
-#   describe('.clear') do
-#     it("clears all boards") do
-#       Board.clear()
-#       expect(Board.all).to(eq([]))
-#     end
-#   end
+  describe('#save') do
+    it("saves a board") do
+      expect(Board.all).to(eq([@board, @board2])) 
+    end
+  end
 
-#   describe('#==') do
-#     it("is the same board if it has the same attributes as another board") do
-#       board1 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
-#       board2 = Board.new({:name => "yee-haw", :topic => "horse-tails", :author => "Molly", :id => nil})
-#       expect(board1).to(eq(board2))
-#     end
-#   end
+  describe('.clear') do
+    it("clears all boards") do
+      Board.clear()
+      expect(Board.all).to(eq([]))
+    end
+  end
+end  
+
+
+
 
 #   describe('.find') do
 #     it("finds a board by id") do
