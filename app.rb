@@ -5,9 +5,6 @@ require('./lib/message')
 require('pry')
 also_reload('lib/**/*.rb')
 
-
-# EXAMPLES FOR GET, POST, PATCH & DELETE
-
 get('/') do
   @boards = Board.all
   erb(:homepage)
@@ -19,12 +16,8 @@ get('/homepage') do
 end
 
 get('/homepage/giddyup') do
+  @boards = Board.all
   erb(:giddyup)
-end
-
-get('/homepage/:id/view') do
-  @board = Board.find(params[:id].to_i())
-  erb(:view)
 end
 
 post('/homepage/giddyup') do 
@@ -36,51 +29,17 @@ post('/homepage/giddyup') do
   redirect to('/homepage')
 end
 
-post('/hompage/:id/comments') do
-  comment = params[:comment]
-  author = params[:author]
+get('/homepage/:id') do
   @board = Board.find(params[:id].to_i())
-  message = Message.new({:comment => comment, :author => author, :board_id => @board.id, :id => nil})
-  message.save()
-  redirect to('/homepage/:id/view')
+  erb(:view)
 end
 
-# post('/albums/:id/songs') do
-#   @album = Album.find(params[:id].to_i())
-#   song = Song.new(params[:song_name], @album.id, nil)
-#   song.save()
-#   erb(:album)
-# end
+post('/homepage/:id/comments') do
+  @board = Board.find(params[:id].to_i())
+  comment = params[:comment]
+  author = params[:author]
+  message = Message.new({:comment => comment, :author => author, :board_id => @board.id, :id => nil})
+  message.save()
+  erb(:view)
+end
 
-# get('/albums/new') do
-#   erb(:new_album)
-# end
-
-# post('/albums') do ## Adds album to list of albums, cannot access in URL bar
-#   name = params[:album_name]
-#   artist = params[:album_artist]
-#   year = params[:album_year]
-#   genre = params[:album_genre]
-#   song = params[:song_id]
-#   in_inventory = params[:in_inventory]
-#   album = Album.new(name, nil, artist, genre, year)
-#   album.save()
-#   redirect to('/albums')
-# end
-
-# patch('/albums/:id') do
-#   @album = Album.find(params[:id].to_i())
-#   @albums = Album.all
-#   if params[:buy]
-#     @album.sold()
-#   else  
-#     @album.update(params[:name])
-#   end
-#   erb(:albums)
-# end
-
-# delete('/albums/:id') do
-#   @album = Album.find(params[:id].to_i())
-#   @album.delete()
-#   redirect to('/albums')
-# end

@@ -3,7 +3,7 @@
 <% if @boards.any? %>
 <ul>
   <% @boards.each do |board| %>
-    <li><a href="/homepage/<%= board.id %>/view"> <%= board.name %></a></li>
+    <li><a href="/homepage/<%= board.id %>"> <%= board.name %></a></li>
   <% end %>
   </ul>
 <% else %>

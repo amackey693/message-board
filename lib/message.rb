@@ -9,7 +9,7 @@ class Message
   def initialize(attributes)
     @comment = attributes.fetch(:comment).downcase
     @author = attributes.fetch(:author)
-    @board_id = board_id
+    @board_id = attributes.fetch(:board_id)
     @id = attributes.fetch(:id) || @@total_rows += 1
     @timestamp = Time.new()
   end
