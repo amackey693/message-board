@@ -3,11 +3,11 @@
 <h3>Author: <%= @board.author %></h3>
 
 
-<h1>User Comments: </h1>
+<h4>User Comments: </h4>
  <% if @board.comments.any? %>
   <% @board.comments.each do |c| %>
    <h4>"<%= c.comment %>"</h4>
-   <p>Author: <%= c.author %> || Time: <%= c.timestamp %></p>
+   <p>Author: <%= c.author %> || Time: <%= c.timestamp %> || <a href="/homepage/<%= c.board.id %>/comments/<%= c.id %>"> Edit </a></p>
   <% end %>
 <% else %>
  <p>There are no comments to display at this time!</p>
@@ -25,6 +25,5 @@
   </div>
   <button type="submit" class="btn">Submit</button>
 </form>
-
 
 <p><a href="/homepage">Return to the homepage!!</a></p>

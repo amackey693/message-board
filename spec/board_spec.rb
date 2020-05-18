@@ -7,7 +7,6 @@ require 'pry'
 
 describe '#Board' do
   before(:each) do
-    Board.clear()
     @board = Board.new({:name => "yee-haw", :topic => "horse tails", :author => "Molly", :id => nil})
     @board.save()
     @board2 = Board.new({:name => "Horse Tails", :topic => "Horse-camp", :author => "Brittany", :id => nil}) 

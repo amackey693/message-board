@@ -43,3 +43,21 @@ post('/homepage/:id/comments') do
   erb(:view)
 end
 
+get('/homepage/:id/comments/:message_id') do
+  @message = Message.find(params[:message_id].to_i())
+  erb(:edit)
+end
+
+patch('/homepage/:id/comments/:message_id') do
+  @board = Board.find(params[:id].to_i())
+  @message = Message.find(params[:message_id].to_i())
+  @message.update(params[:comment], @board.id)
+  erb(:view)
+end
+
+delete('/homepage/:id/comments/:message_id') do 
+  @board =  @board = Board.find(params[:id].to_i())
+  @message = Message.find(params[:message_id].to_i())
+  @message.delete
+  erb(:view)
+end

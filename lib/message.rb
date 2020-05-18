@@ -7,7 +7,7 @@ class Message
   @@total_rows = 0
   
   def initialize(attributes)
-    @comment = attributes.fetch(:comment).downcase
+    @comment = attributes.fetch(:comment)
     @author = attributes.fetch(:author)
     @board_id = attributes.fetch(:board_id)
     @id = attributes.fetch(:id) || @@total_rows += 1

@@ -1,0 +1,16 @@
+<h1> Edit A Comment </h1>
+
+<p>Author: <%= @message.author %> | Comment: <%= @message.comment %></p>
+
+<form action="/homepage/<%= @message.board.id %>/comments/<%= @message.id %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input id="comment" name="comment" type="text" placeholder="edit your comment">
+  <button type="submit">Update Comment!</button>
+</form>
+
+<form action="/homepage/<%= @message.board.id %>/comments/<%= @message.id %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete </button>
+</form>
+
+
