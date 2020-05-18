@@ -19,7 +19,7 @@ class Board
       name = board.fetch("name")
       topic = board.fetch("topic")
       author = board.fetch("author")
-      id = board.fetch("id")
+      id = board.fetch("id").to_i()
       boards.push( Board.new({:name => name, :topic => topic, :author => author, :id => id}) )
     end
     boards
@@ -27,6 +27,7 @@ class Board
 
   def save 
     result = DB.exec("INSERT INTO boards (name, topic, author) VALUES ('#{@name}', '#{@topic}', '#{@author}') RETURNING id;")
+    @id = result.first().fetch("id").to_i
   end
 
   def ==(board_to_compare)
@@ -38,16 +39,21 @@ class Board
   end
 
   def self.find(id)
-    @@boards[id]
+    board = DB.exec("SELECT * FROM boards WHERE id = #{id};").first
+    name = board.fetch("name")
+    topic = board.fetch("topic")
+    author = board.fetch("author")
+    id = board.fetch("id").to_i
+    Board.new({:name => name, :topic => topic, :author => author, :id => id}) 
   end
 
   def update(name)
-    self.name = name
-    @@boards[self.id] = Board.new({:name => self.name, :topic => self.topic, :author => self.author, :id => self.id})
+    @name = name
+    DB.exec("UPDATE boards SET name = '#{@name}' WHERE id = #{@id};")
   end
 
   def delete()
-    @@boards.delete(self.id)
+    DB.exec("DELETE FROM boards WHERE id = #{@id};")
   end
 
   def self.search(search)

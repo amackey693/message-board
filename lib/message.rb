@@ -16,26 +16,26 @@ class Message
     returned_messages = DB.exec("SELECT * FROM messages;")
     messages = []
     returned_messages.each() do |message|
-      name = message.fetch("comment")
+      comment = message.fetch("comment")
       author = message.fetch("author")
       board_id = message.fetch("board_id").to_i()
       id = message.fetch("id").to_i()
       messages.push( Message.new({:comment => comment, :author => author, :id => id, :board_id => board_id}) )
     end
-    boards
+    messages
   end
 
   def ==(comment_to_compare)
     (self.comment() == comment_to_compare.comment()) && (self.board_id() == comment_to_compare.board_id())
   end
 
-  def save 
-    @@messages[self.id] = Message.new({:comment => self.comment, :author => self.author, :board_id => self.board_id, :id => self.id})
+  def save
+    message = DB.exec("INSERT INTO messages (comment, author, board_id) VALUES ('#{@comment}', '#{@author}', #{@board_id}) RETURNING id;")
+    @id = message.first().fetch("id").to_i
   end
 
   def self.clear
-    @@messages = {}
-    @@total_rows = 0
+    DB.exec("DELETE FROM messages *;")
   end
 
   def self.find(id)
@@ -43,13 +43,13 @@ class Message
   end
 
   def update(comment, board_id)
-    self.comment = comment
-    self.board_id = board_id
-    @@messages[self.id] = Message.new({:comment => self.comment, :author => self.author, :board_id => self.board_id, :id => self.id})
+    @comment = comment
+    @board_id = board_id 
+    DB.exec("UPDATE messages SET comment = '#{@comment}', board_id = #{@board_id} WHERE id = #{@id};")
   end
 
   def delete()
-    @@messages.delete(self.id)
+   DB.exec("DELETE FROM messages WHERE id = #{@id};")
   end
 
   def self.sort
