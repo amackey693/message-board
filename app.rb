@@ -3,6 +3,9 @@ require('sinatra/reloader')
 require('./lib/board')
 require('./lib/message')
 require('pry')
+require("pg")
+
+DB = PG.connect({:dbname => "message_board"})
 also_reload('lib/**/*.rb')
 
 get('/') do

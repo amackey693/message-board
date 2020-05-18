@@ -3,20 +3,26 @@ require 'pry'
 class Board
   attr_accessor :name, :topic, :author
   attr_reader :timestamp, :id
-  @@boards = {}
-  @@total_rows = 0
   
   def initialize(attributes)
     @name = attributes.fetch(:name).downcase
     @topic = attributes.fetch(:topic).downcase
     @author = attributes.fetch(:author)
-    @id = attributes.fetch(:id) || @@total_rows += 1
+    @id = attributes.fetch(:id) 
     @timestamp = Time.new()
   end
 
   def self.all
-    @@boards.values()
-    # binding.pry
+    returned_boards = DB.exec("SELECT * FROM boards;")
+    boards = []
+    returned_boards.each() do |board|
+      name = board.fetch("name")
+      topic = board.fetch("topic")
+      author = board.fetch("author")
+      id = board.fetch("id")
+      boards.push( Board.new({:name => name, :topic => topic, :author => author, :id => id}) )
+    end
+    boards
   end
 
   def save 
